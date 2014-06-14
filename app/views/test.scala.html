@@ -1,0 +1,51 @@
+@(timings: List[List[Tuple5[Int,String,Long,Long,Long]]],test:String)
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+      function drawChart(){
+ 			       	@timings.indices.map { i =>             
+       	
+ 			 var options@i = {
+ 			 									'width':1024,
+                       'height':768,
+                       'vAxes': [
+                        {'title':'Time in milliseconds'
+
+                        }
+                       ],
+                        'legend':{
+                        'position':'bottom'
+                        },
+                       'hAxis': 
+                        {'title':'Trial'}
+                       
+                     };
+
+
+       	var data@i = new google.visualization.DataTable();
+        data@{i}.addColumn('number','Trial') 
+       	data@{i}.addColumn('number','Relate')
+       	data@{i}.addColumn( 'number','Anorm 2.1.1')
+       	data@{i}.addColumn('number' ,'JDBC')
+        	@timings(i).map { t =>  
+        data@{i}.addRow([@t._1,@t._3,@t._4,@t._5])
+        options@{i}.title='@t._2'
+        }
+        var chart@{i} = new google.visualization.LineChart(document.getElementById('chart_div@{i}'));
+        chart@{i}.draw(data@{i}, options@{i});
+        
+        }
+      
+      }
+
+  </script>    
+
+<h4> @test </h4>
+@timings.indices.map { i=>
+<div id="chart_div@i"></div>
+}
