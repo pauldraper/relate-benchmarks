@@ -1,0 +1,66 @@
+@(timings: List[Tuple5[Int,Long,Long,Long,String]])
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+      function drawChart(){
+ 			      
+       	
+ 			 var options = {
+ 			 'width':1024,
+                       'height':768,
+                       'vAxes': [
+                        {'title':'Time in milliseconds',
+			 'minValue':0
+                        }
+                       ],
+                        'legend':{
+                        'position':'bottom'
+                        },
+                       'hAxis': 
+                        {'title':'# of Records'}
+                       
+                     };
+
+
+       	var data = new google.visualization.DataTable();
+        data.addColumn('number','# of Records')
+       	data.addColumn('number','Relate')
+       	data.addColumn( 'number','Anorm 2.1.1')
+       	data.addColumn('number' ,'JDBC')
+        	@timings.map { t =>  
+        data.addRow([@t._1,@t._2,@t._3,@t._4])
+        options.title='@t._5'
+        }
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        
+        
+      
+      }
+
+  </script>    
+
+<h4> Benchmark Test Results </h4>
+<div id="chart_div"></div>
+
+<table>
+  <tr>
+    <th>Rows</th>
+    <th>Relate</th>
+    <th>Anorm 2.1.1</th>
+    <th>JDBC </th>
+  </tr>
+@timings.map { t=>
+<tr>
+<td>@t._1</td>
+<td>@t._2</td>
+<td>@t._3</td>
+<td>@t._4</td>
+</tr>
+}
+</table>

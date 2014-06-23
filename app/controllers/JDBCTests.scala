@@ -56,7 +56,7 @@ object JDBCTests {
         
     }
 
-  def select1_long(nums:Seq[Int]) = {
+  def select1_long(nums:Seq[Long]) = {
       
       DB.withConnection { connection =>
         val queryBuilder = new StringBuilder((nums.size*2)+100,"SELECT `col14` FROM  `sel_50` WHERE `col44` IN (?" )
@@ -514,9 +514,9 @@ def select1_double(nums:Seq[Double]) = {
 
 
   def insert3_int(rows:Seq[Int]) = {
-      val cols = 200
+      val cols = 100
         DB.withConnection { connection =>
-        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_200` VALUES  (?" )
+        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_100` VALUES  (?" )
         var i = 1
         while (i < cols) {
           queryBuilder.append(",?")
@@ -538,9 +538,9 @@ def select1_double(nums:Seq[Double]) = {
     }
   
   def insert3_long(rows:Seq[Long]) = {
-    val cols = 200
+    val cols = 100
         DB.withConnection { connection =>
-        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_200` VALUES (?" )
+        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_100` VALUES (?" )
         var i = 1
         while (i < cols) {
           queryBuilder.append(",?")
@@ -562,9 +562,9 @@ def select1_double(nums:Seq[Double]) = {
     }
       
   def insert3_string(rows:Seq[String]) = {
-    val cols = 200
+    val cols = 100
         DB.withConnection { connection =>
-        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_200` VALUES  (?" )
+        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_100` VALUES  (?" )
         var i = 1
         while (i < cols) {
           queryBuilder.append(",?")
@@ -587,9 +587,9 @@ def select1_double(nums:Seq[Double]) = {
  
 
   def insert3_double(rows:Seq[Double]) = {
-    val cols = 200
+    val cols = 100
         DB.withConnection { connection =>
-        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_200` VALUES  (?" )
+        val queryBuilder = new StringBuilder((cols*2)+100,"INSERT INTO `ins_100` VALUES  (?" )
         var i = 1
         while (i < cols) {
           queryBuilder.append(",?")

@@ -18,7 +18,14 @@ object Application extends Controller {
 	Test.testInt()
 	Ok(views.html.index("Testing is DOne"))
  }
-			
+ def test1() = Action {
+	//
+	//Test.test2()
+
+	changeType("ins_10","text")
+	Ok(views.html.test1(Test.test8()))
+	}
+
 	def changeType(table:String,type1:String) = {
 		val count = DB.withConnection { implicit connection =>
 		RelateSQL("SELECT count(*) AS cnt FROM information_schema.columns WHERE table_name = '"+table+"'")
