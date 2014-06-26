@@ -21,7 +21,6 @@ object ApplicationBuild extends Build {
     scalaVersion := "2.10.1",
     resolvers ++= List(   
       Resolver.file("local ivy repository", file(System.getenv("HOME") + "/.ivy2/local/"))(Resolver.ivyStylePatterns),
-     "lucidchart snapshot repository" at "http://repo.lucidchart.com:8081/artifactory/libs-snapshot-local",
       "Staging Sonatype repository" at "https://oss.sonatype.org/content/groups/staging/" )
   )
 
