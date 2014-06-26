@@ -12,8 +12,7 @@ object ApplicationBuild extends Build {
     "mysql" % "mysql-connector-java" % "5.1.21",
     "play" %% "anorm" % "2.1.1",
     "play" %% "play-jdbc" % "2.1.1",
-    "com.lucidchart" %% "relate" % "0.1-SNAPSHOT"
- 
+    "com.lucidchart" %% "relate" % "1.3"
   )
 
 
