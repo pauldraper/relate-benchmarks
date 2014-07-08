@@ -1,0 +1,7 @@
+USE temp;
+
+CREATE TABLE streaming (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	string VARCHAR(50) NOT NULL,
+	PRIMARY KEY (id)
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;

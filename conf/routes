@@ -6,6 +6,7 @@
 GET     /testInts											controllers.Application.testInt
 #GET     /testLongs											controllers.Application.testLong
 #GET     /testAll											controllers.Application.testAll
+GET     /stream												controllers.streaming.StreamingController.runStream
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

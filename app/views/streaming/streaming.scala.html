@@ -1,0 +1,89 @@
+@(results: List[models.streaming.Benchmark])
+
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Streaming Benchmarks</title>
+
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap/css/bootstrap.css")">
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Streaming Benchmarks</h1>
+			<hr />
+			<p class="lead">
+				Benchmarks comparing execution time of counting the number of results (yeah, I know
+				there's a COUNT function...) using regular Relate asList, asIterator, LIMIT/OFFSET
+				pagination, and user supplied query pagination.
+			</p>
+			<p class="lead">
+				In each case the query is run on a table that contains a million records, but we test
+				performance with result sets of four different sizes:
+
+				<ul class="lead">
+					<li>1,000</li>
+					<li>10,000</li>
+					<li>100,000</li>
+					<li>1,000,000</li>
+				</ul>
+			</p>
+			<p class="lead">
+				The time reported is the result of running each test case 20 times. Time is in millis.
+			</p>
+			<p class="lead">
+				Hovering over a result will display the query used.
+			</p>
+			<br />
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th># Records</th>
+						<th>Relate</th>
+						<th>asIterator</th>
+						<th>LIMIT/OFFSET</th>
+						<th>User Supplied Query</th>
+					</tr>
+				</thead>
+				<tbody>
+					@results.map { result =>
+						<tr>
+							<td>@result.numRecords</td>
+							<td data-toggle="tooltip" data-placement="bottom" title="@result.relate.query">
+								@result.relate.time match {
+									case -1 => { Single query took longer than 10 seconds }
+									case -2 => { @result.relate.error.get }
+									case _ => { @result.relate.time }
+								}
+							</td>
+							<td data-toggle="tooltip" data-placement="bottom" title="@result.asIterator.query">
+								@result.asIterator.time match {
+									case -1 => { Single query took longer than 10 seconds }
+									case -2 => { @result.asIterator.error.get }
+									case _ => { @result.asIterator.time }
+								}
+							</td>
+							<td data-toggle="tooltip" data-placement="bottom" title="@result.limitOffset.query">
+								@result.limitOffset.time match {
+									case -1 => { Single query took longer than 10 seconds }
+									case -2 => { @result.limitOffset.error.get }
+									case _ => { @result.limitOffset.time }
+								}
+							</td>
+							<td data-toggle="tooltip" data-placement="bottom" title="@result.userSupplied.query">
+								@result.userSupplied.time match {
+									case -1 => { Single query took longer than 10 seconds }
+									case -2 => { @result.userSupplied.error.get }
+									case _ => { @result.userSupplied.time }
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</body>
+
+</html>
