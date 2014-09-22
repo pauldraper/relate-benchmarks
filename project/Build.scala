@@ -18,7 +18,7 @@ object ApplicationBuild extends Build {
 
   val main = Project(appName, file(".")).enablePlugins(PlayScala).settings(
     libraryDependencies ++= appDependencies,
-    scalaVersion := "2.10.1",
+    scalaVersion := "2.11.2",
     resolvers ++= List(   
       Resolver.file("local ivy repository", file(System.getenv("HOME") + "/.ivy2/local/"))(Resolver.ivyStylePatterns),
       "Staging Sonatype repository" at "https://oss.sonatype.org/content/groups/staging/" ),
